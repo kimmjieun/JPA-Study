@@ -41,7 +41,7 @@ public class JpaMain {
 //            findMember.setName("HelloJPA");
             // 그 후에 저장안해도 됨 왜? 트랜잭션 커밋전에 변경사항 확인하고 업데이트 쿼리 날려주고 커밋하기 때문
 
-
+            // test
 
             tx.commit();
         } catch (Exception e){
