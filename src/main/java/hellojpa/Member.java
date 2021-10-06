@@ -1,31 +1,45 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 public class Member {
     @Id
-    private Long id;
+    @GeneratedValue
+    @Column(name = "MEMBER_ID")
+    private Long id; // int 0이 있어서 애매, 대신 integer 좋은 것은 Long
 
-    @Column(name = "name") // 객체는 username, 컬럼명은 name
+    @Column(name = "USERNAME") // 객체는 username, 컬럼명은 name
     private String username;
 
-    private Integer age;
+//    @Column(name = "TEAM_ID")
+//    private Long teamId;
+    @ManyToOne
+    @JoinColumn(name="TEAM_ID")
+    private Team team; // 멤버는 many, 팀은 one
 
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    @Lob // 큰 콘텐츠 디비의 TEXT 비슷
-    private String description;
-
-    public Member(){
-
+    public Long getId() {
+        return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
 }
