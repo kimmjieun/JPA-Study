@@ -1,6 +1,7 @@
 package hellojpa;
 
 import javax.persistence.*;
+import java.util.List;
 
 public class JpaMain {
 
@@ -37,6 +38,11 @@ public class JpaMain {
 
             // 연관관계 적용 후
             Member findMember = em.find(Member.class,member.getId());
+            List<Member> members = findMember.getTeam().getMembers();
+
+            for (Member m : members){
+                System.out.println("m = "+m.getUsername());
+            }
 
             Team findTeam = findMember.getTeam();
             System.out.println("findTeam = "+findTeam.getName());
