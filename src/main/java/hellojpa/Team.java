@@ -12,7 +12,8 @@ public class Team {
     private String name;
 
     // mappedBy 매핑이 되었어, 주인이 아님
-    @OneToMany(mappedBy = "team")
+    @OneToMany
+    @JoinColumn(name = "TEAM_ID")
     private List<Member> members = new ArrayList<>(); // 양방향 매핑
 
     public List<Member> getMembers() {

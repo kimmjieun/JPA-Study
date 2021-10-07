@@ -14,7 +14,7 @@ public class Member {
 
     // 주인
     @ManyToOne
-    @JoinColumn(name="TEAM_ID")
+//    @JoinColumn(name="TEAM_ID")
     private Team team; // 멤버는 many, 팀은 one
 
     public Long getId() {

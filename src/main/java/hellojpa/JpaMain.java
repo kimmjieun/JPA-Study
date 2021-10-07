@@ -14,19 +14,14 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
-
             Member member = new Member();
             member.setUsername("member1");
-            member.changeTeam(team );
-            em.persist(member);
 
-            // 양방향 매핑시 양쪽에 값을 다 넣어주는 게 맞다
+            Team team = new Team();
+            team.setName("teamA");
+            team.getMembers().add(member);
 
-            em.flush();
-            em.clear();
+            em.persist(team);
 
             tx.commit();
         } catch (Exception e){
