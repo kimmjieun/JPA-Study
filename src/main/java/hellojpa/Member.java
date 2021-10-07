@@ -12,8 +12,7 @@ public class Member {
     @Column(name = "USERNAME") // 객체는 username, 컬럼명은 name
     private String username;
 
-//    @Column(name = "TEAM_ID")
-//    private Long teamId;
+    // 주인
     @ManyToOne
     @JoinColumn(name="TEAM_ID")
     private Team team; // 멤버는 many, 팀은 one
@@ -40,6 +39,12 @@ public class Member {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    // 연관관계 편의 메소드
+    public void changeTeam(Team team){
+        this.team = team;
+        team.getMembers().add(this);
     }
 
 }

@@ -11,6 +11,10 @@ public class Team {
     private Long id;
     private String name;
 
+    // mappedBy 매핑이 되었어, 주인이 아님
+    @OneToMany(mappedBy = "team")
+    private List<Member> members = new ArrayList<>(); // 양방향 매핑
+
     public List<Member> getMembers() {
         return members;
     }
@@ -18,10 +22,6 @@ public class Team {
     public void setMembers(List<Member> members) {
         this.members = members;
     }
-
-    // mappedBy 매핑이 되었어, 주인이 아님
-    @OneToMany(mappedBy = "team")
-    private List<Member> members = new ArrayList<>(); // 양방향 매핑
 
     public Long getId() {
         return id;
