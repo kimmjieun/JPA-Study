@@ -1,7 +1,6 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.util.concurrent.locks.Lock;
 
 @Entity
 public class Member {
@@ -13,14 +12,22 @@ public class Member {
     @Column(name = "USERNAME") // 객체는 username, 컬럼명은 name
     private String username;
 
-    // 주인
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
-    private Team team; // 멤버는 many, 팀은 one
+    // Period
+    @Embedded
+    private Period period;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "LOCKER_ID")
-    private Locker locker;
+    // Address
+    @Embedded
+    private Address address;
+
+    // Address
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "city", column = @Column(name = "WORK_CITY")),
+        @AttributeOverride(name = "street", column = @Column(name = "WORK_STREET")),
+        @AttributeOverride(name = "zipcode", column = @Column(name = "WORK_ZIPCODE"))
+    })
+    private Address workAddress;
 
     public Long getId() {
         return id;
@@ -38,18 +45,19 @@ public class Member {
         this.username = username;
     }
 
-    public Team getTeam() {
-        return team;
+    public Period getPeriod() {
+        return period;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setPeriod(Period period) {
+        this.period = period;
     }
 
-    // 연관관계 편의 메소드
-    public void changeTeam(Team team){
-        this.team = team;
-        team.getMembers().add(this);
+    public Address getAddress() {
+        return address;
     }
 
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 }

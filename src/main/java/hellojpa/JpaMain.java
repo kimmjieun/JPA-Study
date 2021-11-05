@@ -14,20 +14,16 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Child child1 = new Child();
-            Child child2 = new Child();
+            Member member = new Member();
 
-            Parent parent = new Parent();
-            parent.addChild(child1);
-            parent.addChild(child2);
+            member.setUsername("hello");
+            member.setAddress(new Address("city","street","zipcode"));
+            member.setPeriod(new Period());
 
-            em.persist(parent);
+            em.persist(member); // 디비에 값 반영
 
-            em.flush();
-            em.clear(); // 깔끔하게 지워줌
 
-            Parent findParent = em.find(Parent.class, parent.getId());
-            findParent.getChildList().remove(0);
+
             tx.commit();
         } catch (Exception e){
             tx.rollback();
