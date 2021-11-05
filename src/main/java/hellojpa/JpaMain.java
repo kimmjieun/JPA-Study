@@ -14,15 +14,16 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Address address = new Address("city","street","zipcode");
+
             Member member = new Member();
-
-            member.setUsername("hello");
-            member.setAddress(new Address("city","street","zipcode"));
-            member.setPeriod(new Period());
-
+            member.setUsername("member1");
+            member.setAddress(address);
             em.persist(member); // 디비에 값 반영
 
 
+            Address newAddress = new Address("newCity", address.getStreet(), address.getZipcode());
+            member.setAddress(newAddress);
 
             tx.commit();
         } catch (Exception e){

@@ -10,9 +10,10 @@ public class Address {
 
 //    private Member member; // 임베디드 타입으로 엔티티를 가질 수 있다
 
-    public Address(){
+    public Address() {
 
     }
+
     public Address(String city, String street, String zipcode) {
         this.city = city;
         this.street = street;
@@ -23,23 +24,14 @@ public class Address {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getStreet() {
         return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
     }
 
     public String getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
+    //setter 삭제하거나 private으로 선언
+
 }
